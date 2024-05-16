@@ -31,7 +31,7 @@ router.all(
         const smptConnected = await new Promise(async (resolve) => {
             const smtp = new SMTPClient({
                 host: mxRecords[0].exchange,
-                port: 587,
+                port: 25,
             });
 
             try {
@@ -43,6 +43,7 @@ router.all(
                 resolve(true);
             } catch (err) {
                 console.error("SMTP connection error:", err);
+
                 try {
                     await smtp.quit();
                 } catch (quitErr) {
